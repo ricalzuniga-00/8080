@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intel 8080 Emulator & Assembler</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
     <header>
@@ -94,6 +94,69 @@ HLT"></textarea>
                 </div>
             </div>
         </section>
+<section id="fpu-section">
+
+    <div class="fpu-panel">
+
+        <div class="fpu-header">
+            <h2>Floating Point Coprocessor (FPU)</h2>
+            <span class="fpu-badge">READY</span>
+        </div>
+
+        <p class="fpu-description">
+            Coprocesador especializado para operaciones matemáticas
+            de punto flotante.
+        </p>
+
+        <div class="fpu-registers">
+
+            <div class="fpu-field">
+                <label for="fpu-f0">Registro F0</label>
+                <input
+                    type="number"
+                    id="fpu-f0"
+                    step="any"
+                    placeholder="10.5"
+                >
+            </div>
+
+            <div class="fpu-field">
+                <label for="fpu-f1">Registro F1</label>
+                <input
+                    type="number"
+                    id="fpu-f1"
+                    step="any"
+                    placeholder="5.2"
+                >
+            </div>
+
+        </div>
+
+        <div class="fpu-buttons">
+            <button id="fpu-add">ADD</button>
+            <button id="fpu-sub">SUB</button>
+            <button id="fpu-mul">MUL</button>
+            <button id="fpu-div">DIV</button>
+            <button id="fpu-reset" class="fpu-reset">RESET</button>
+        </div>
+
+        <div class="fpu-output">
+
+            <div class="fpu-result-box">
+                <span>RESULT</span>
+                <strong id="fpu-result">0.0</strong>
+            </div>
+
+            <div class="fpu-status-box">
+                <span>STATUS</span>
+                <strong id="fpu-status">READY</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
     </main>
 
     <script src="cpu.js"></script>
