@@ -189,3 +189,117 @@ document.getElementById('btn-mem-go').addEventListener('click', () => {
 
 // Initial UI update
 updateUI();
+
+const fpuF0Input = document.getElementById('fpu-f0');
+const fpuF1Input = document.getElementById('fpu-f1');
+
+const fpuResultText = document.getElementById('fpu-result');
+const fpuStatusText = document.getElementById('fpu-status');
+const fpuBadge = document.querySelector('.fpu-badge');
+
+const fpuAddButton = document.getElementById('fpu-add');
+const fpuSubButton = document.getElementById('fpu-sub');
+const fpuMulButton = document.getElementById('fpu-mul');
+const fpuDivButton = document.getElementById('fpu-div');
+const fpuResetButton = document.getElementById('fpu-reset');
+
+
+// Evita resultados como 33.800000000000004
+function formatFpuResult(value) {
+
+    if (value === null || Number.isNaN(value)) {
+        return "ERROR";
+    }
+
+    return Number(value.toFixed(10));
+}
+
+
+// Actualiza lo que aparece en pantalla
+function updateFpuDisplay() {
+
+    fpuResultText.textContent = formatFpuResult(fpu.result);
+    fpuStatusText.textContent = fpu.status;
+    fpuBadge.textContent = fpu.status === "OK" ? "OK" :
+                           fpu.status === "READY" ? "READY" : "ERROR";
+}
+
+
+// Lee desde la interfaz
+function loadFpuValues() {
+
+    const value0 = parseFloat(fpuF0Input.value);
+    const value1 = parseFloat(fpuF1Input.value);
+
+    if (Number.isNaN(value0) || Number.isNaN(value1)) {
+
+        fpu.status = "ERROR: INVALID VALUE";
+        fpu.result = null;
+
+        updateFpuDisplay();
+
+        return false;
+    }
+
+    fpu.setValues(value0, value1);
+
+    return true;
+}
+
+
+// SUMA
+fpuAddButton.addEventListener('click', () => {
+
+    if (!loadFpuValues()) return;
+
+    fpu.add();
+
+    updateFpuDisplay();
+});
+
+
+// RESTA
+fpuSubButton.addEventListener('click', () => {
+
+    if (!loadFpuValues()) return;
+
+    fpu.subtract();
+
+    updateFpuDisplay();
+});
+
+
+// MULTIPLICACION
+fpuMulButton.addEventListener('click', () => {
+
+    if (!loadFpuValues()) return;
+
+    fpu.multiply();
+
+    updateFpuDisplay();
+});
+
+
+// DIVISION
+fpuDivButton.addEventListener('click', () => {
+
+    if (!loadFpuValues()) return;
+
+    fpu.divide();
+
+    updateFpuDisplay();
+});
+
+
+// RESET
+fpuResetButton.addEventListener('click', () => {
+
+    fpu.reset();
+
+    fpuF0Input.value = "";
+    fpuF1Input.value = "";
+
+    updateFpuDisplay();
+});
+
+updateFpuDisplay();
