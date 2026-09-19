@@ -72,3 +72,82 @@ Para utilizar el emulador de forma local en tu máquina o para desarrollo:
 ---
 **Versión del Proyecto:** 2.1.0
 **Licencia:** MIT
+
+//Documentación
+## Coprocesador de Punto Flotante (FPU)
+
+Como ampliación del emulador Intel 8080, se integró conceptualmente un coprocesador de punto flotante (FPU).
+
+El objetivo de este módulo es representar una unidad especializada capaz de realizar operaciones matemáticas con números decimales sin modificar directamente el funcionamiento interno del procesador Intel 8080.
+
+### Funciones implementadas
+
+El coprocesador permite realizar:
+
+- Suma (ADD)
+- Resta (SUB)
+- Multiplicación (MUL)
+- División (DIV)
+- Reinicio de registros (RESET)
+- Detección de división entre cero
+
+### Registros utilizados
+
+La FPU utiliza los siguientes valores:
+
+- F0: primer operando
+- F1: segundo operando
+- RESULT: resultado de la operación
+- STATUS: estado del coprocesador
+
+### Ejemplo
+
+F0 = 10.5  
+F1 = 5.2  
+
+Operación:
+
+ADD
+
+Resultado:
+
+15.7
+
+Estado:
+
+OK
+
+### Interfaz gráfica
+
+Se agregó un panel independiente dentro del emulador para representar visualmente el coprocesador.
+
+Desde esta interfaz se pueden ingresar los valores de F0 y F1, seleccionar la operación y observar el resultado y el estado de la FPU.
+
+### Manejo de errores
+
+El sistema detecta operaciones inválidas, como una división entre cero.
+
+Ejemplo:
+
+F0 = 10  
+F1 = 0  
+
+Operación:
+
+DIV
+
+Resultado:
+
+ERROR
+
+Estado:
+
+ERROR: DIVISION BY ZERO
+
+### Tecnologías utilizadas
+
+- HTML5
+- CSS3
+- JavaScript
+- Git
+- GitHub
